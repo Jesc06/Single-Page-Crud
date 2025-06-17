@@ -1,5 +1,5 @@
-# Single-Page-Crud
-Single Page one View CRUD in ASP.NET CORE MVC
+# 🧾 Single-Page-CRUD
+Create a simple one-page CRUD app using ASP.NET Core MVC
         
 ---
 
@@ -61,8 +61,12 @@ asp-route-id is parameter of controller
 ### And this one is the controller for deleting the data.
 ![Step 1](Delete.png)
 
+### Overall folder structure
+![Step 1](Structure.png)
+
 
 # After you finish all of that, congratulations — you now have a single-page CRUD using ASP.NET Core MVC!
+![Step 1](Todo.png)
 
 
 
