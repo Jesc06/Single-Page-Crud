@@ -64,7 +64,7 @@ Here in the view, we have an 'Add data to database' section, and we also have a 
 
 
 
-### And this is the code for displaying the data in the table from the database
+### Table code structure
 ![Step 1](DisplayToTable.png)
 
 
