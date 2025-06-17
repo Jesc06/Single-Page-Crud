@@ -109,7 +109,7 @@ asp-route-id is parameter of Delete controller
 
 
 ### This is our InsertTask controller.
-![Step 1](InsertTask.png)
+![Step 1](NewInsert.png)
 
 
 
