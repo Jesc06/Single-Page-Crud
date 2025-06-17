@@ -133,7 +133,7 @@ asp-route-id is parameter of Delete controller
 
 
 ### This one is the controller for editing the data.
-![Step 1](EditData.png)
+![Step 1](NewEdit.png)
 
 
 
