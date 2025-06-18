@@ -119,7 +119,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### This, on the other hand, is the controller for displaying the data in the table.
+### This is the controller responsible for displaying the data in the table.
 ![Step 1](DisplayTable.png)
 
 
@@ -132,7 +132,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### This one is the controller for editing the data.
+### This controller handles the editing of data.
 ![Step 1](NewEdit.png)
 
 
@@ -145,7 +145,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### And this one is the controller for deleting the data.
+### This controller handles the deletion of data.
 ![Step 1](Delete.png)
 
 
