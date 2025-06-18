@@ -1,15 +1,6 @@
 # 🧾 Single-Page-CRUD
-Create a simple one-page CRUD app using ASP.NET Core MVC
-        
+This guide will show you how to build a simple one-page CRUD app using ASP.NET Core MVC, where you can add, view, edit, and delete data without switching pages.
 
-
-## ✅ Prerequisites
-
-- ✅ Visual Studio 2022 installed
-- ✅ .NET 8.0 or .NET 9.0 SDK installed
-
-
- 
 
 
 ## 🛠️ Setup Instructions
@@ -24,7 +15,7 @@ Create a simple one-page CRUD app using ASP.NET Core MVC
 
 
 
-### 2. Create another model
+### 2. To make single-page CRUD work, we need to create another model that combines both List<Todo> and Todo, because Razor Views can’t handle two separate models at the same time.
 ![Step 1](CreateAnotherModel.png)
 #### The TodoModel is for inserting data into the database,
 #### while the TodoList is for handling or displaying the data in the table.
@@ -52,8 +43,8 @@ Create a simple one-page CRUD app using ASP.NET Core MVC
 
 
 # About View
-Here in the view, we have an 'Add data to database' section, and we also have a table where the data from the database will be stored.
-### First, this is the code for inserting data into the database using the POST method.
+This view includes a form to add data to the database and a table that shows the data saved.
+### First, here’s the code for inserting data into the database using the POST method.
 ![Step 1](AddDataToDatabase.png)
 
 
@@ -76,7 +67,7 @@ Here in the view, we have an 'Add data to database' section, and we also have a 
 
 
 
-# Inside the tbody, we have a GET method for Edit and a POST method for Delete.
+# In the tbody section of the table, we added a GET method for editing and a POST method for deleting data.
 #### First, this is the one for Edit.
 ![Step 1](EditMethod.png)
 
