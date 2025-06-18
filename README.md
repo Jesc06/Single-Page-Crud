@@ -44,7 +44,7 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 # About View
 This view includes a form to add data to the database and a table that shows the data saved.
-### First, here’s the code for inserting data into the database using the POST method.
+### First, here’s the code for adding data into the database using the POST method.
 ![Step 1](AddDataToDatabase.png)
 
 
@@ -99,7 +99,7 @@ asp-route-id is parameter of Delete controller
 # After you’ve set all of that up, here’s the logic in the controller.
 
 
-### This is our InsertTask controller.
+### Controller Logic for Adding Data
 ![Step 1](NewInsert.png)
 
 
@@ -110,7 +110,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### This is the controller responsible for displaying the data in the table.
+### Controller logic for Table
 ![Step 1](DisplayTable.png)
 
 
@@ -123,7 +123,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### This controller handles the editing of data.
+### Controller logic for Edit
 ![Step 1](NewEdit.png)
 
 
@@ -136,7 +136,7 @@ asp-route-id is parameter of Delete controller
 
 
 
-### This controller handles the deletion of data.
+### Controller logic for deleting data
 ![Step 1](Delete.png)
 
 
