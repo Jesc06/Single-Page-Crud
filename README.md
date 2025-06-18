@@ -9,7 +9,7 @@ Create a simple one-page CRUD app using ASP.NET Core MVC
 - ✅ .NET 8.0 or .NET 9.0 SDK installed
 
 
-
+ 
 
 
 ## 🛠️ Setup Instructions
