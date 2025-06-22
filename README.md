@@ -1,5 +1,5 @@
 # Single-Page-CRUD
-This guide will show you how to build a simple one-page CRUD app using ASP.NET Core MVC, where you can add, view, edit, and delete data without switching pages.      
+This guide will show you how to build a simple one-page CRUD app using ASP.NET Core MVC, where you can add, view, edit, and delete data without switching pages.       
 
 
   
