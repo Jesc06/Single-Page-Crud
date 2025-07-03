@@ -6,8 +6,22 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 ## 🛠️ Setup Instructions
 
 ### 1. Create Model
-![Step 1](CreateModel.png)
 
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+namespace Todo_List_App.Models
+{
+    public class Todo
+    {
+        [Key]
+        public int Id { get; set; } 
+        [Required]
+        public string Task { get; set; } 
+    }
+}
+
+```
 
 
 
@@ -16,7 +30,20 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 
 ### 2. To make single-page CRUD work, we need to create another model that combines both List<Todo> and Todo, because Razor Views can’t handle two separate models at the same time.
-![Step 1](CreateAnotherModel.png)
+
+```csharp
+namespace Todo_List_App.Models
+{
+    public class TodoNewModel
+    {
+        public Todo? TodoModel { get; set; } = new Todo();
+        public  List<Todo> listTodoModel { get; set; } = new List<Todo>();
+    }
+}
+
+```
+
+
 #### The TodoModel is for inserting data into the database,
 #### while the TodoList is for handling or displaying the data in the table.
 
@@ -29,7 +56,54 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 
 ### 3. Set up View
-![Step 1](CreateView.png)
+
+
+```cshtml
+
+@model Todo_List_App.Models.TodoNewModel
+
+<div class="card">
+
+    <h1>Todolist</h1>
+
+    <form asp-controller="Todo" asp-action="InsertTask" method="post">
+        <div class="d-flex align-items-center gap-2">
+            <input type="hidden" asp-for="TodoModel.Id">
+            <input asp-for="TodoModel.Task" type="text" class="form-control form-control-lg me-2" placeholder="Write your todo here">
+            <button type="submit" class="btn btn-primary btn-lg">Add</button>
+        </div>
+    </form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.listTodoModel)
+            {
+                <tr>
+                    <td>@data.Task</td>
+                    <td><a class="btn btn-success" asp-controller="Todo" asp-action="Edit" asp-route-GetId="@data.Id">Edit</a></td>
+                    <td>
+                        <form asp-controller="Todo" asp-route-id="@data.Id" asp-action="Delete" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+
+```
 
 
 
@@ -44,8 +118,16 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 # About View
 ### First, here’s the code for adding data into the database using the POST method.
-![Step 1](AddDataToDatabase.png)
 
+```cshtml
+    <form asp-controller="Todo" asp-action="InsertTask" method="post">
+        <div class="d-flex align-items-center gap-2">
+            <input type="hidden" asp-for="TodoModel.Id">
+            <input asp-for="TodoModel.Task" type="text" class="form-control form-control-lg me-2" placeholder="Write your todo here">
+            <button type="submit" class="btn btn-primary btn-lg">Add</button>
+        </div>
+    </form>
+```
 
 
 
@@ -55,7 +137,35 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 
 ### Table code structure
-![Step 1](DisplayToTable.png)
+
+```cshtml
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model.listTodoModel)
+            {
+                <tr>
+                    <td>@data.Task</td>
+                    <td><a class="btn btn-success" asp-controller="Todo" asp-action="Edit" asp-route-GetId="@data.Id">Edit</a></td>
+                    <td>
+                        <form asp-controller="Todo" asp-route-id="@data.Id" asp-action="Delete" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+```
 
 
 
@@ -68,7 +178,12 @@ This guide will show you how to build a simple one-page CRUD app using ASP.NET C
 
 # In the tbody section of the table, we added a GET method for editing and a POST method for deleting data.
 #### First, this is the one for Edit.
-![Step 1](EditMethod.png)
+
+
+```cshtml
+<td><a class="btn btn-success" asp-controller="Todo" asp-action="Edit" asp-route-GetId="@data.Id">Edit</a></td>
+```
+
 
 asp-route-GetId is parameter of Edit controller
 
@@ -81,7 +196,16 @@ asp-route-GetId is parameter of Edit controller
 
 
 #### Second, this is the one for Delete.
-![Step 1](DeleteRecord.png)
+
+
+```cshtml
+   <td>
+       <form asp-controller="Todo" asp-route-id="@data.Id" asp-action="Delete" method="post">
+           <button type="submit" class="btn btn-danger">Delete</button>
+       </form>
+   </td>
+```
+
 
 asp-route-id is parameter of Delete controller
 
@@ -99,7 +223,28 @@ asp-route-id is parameter of Delete controller
 
 
 ### Controller Logic for Adding Data
-![Step 1](NewInsert.png)
+
+```csharp
+
+        //Add data sa database
+        [HttpPost]
+        public ActionResult InsertTask()
+        {
+            TodoNewModel table = new TodoNewModel();
+
+            if (table.TodoModel.Id == 0)
+            {
+                _TodoTable.TodoData.Add(table.TodoModel);
+            }
+            else
+            {
+                table.TodoModel  = _TodoTable.TodoData.Find(table.TodoModel.Id);
+            }
+            _TodoTable.SaveChanges();
+            return RedirectToAction("TodoList");
+        }
+
+```
 
 
 
@@ -110,7 +255,20 @@ asp-route-id is parameter of Delete controller
 
 
 ### Controller logic for Table
-![Step 1](DisplayTable.png)
+
+```csharp
+
+        //kunin yung data sa  database tapos diplay sa table
+        public IActionResult TodoList()
+        {
+            TodoNewModel DataTable = new TodoNewModel
+            {
+                listTodoModel = _TodoTable.TodoData.ToList()
+            };
+            return View(DataTable); 
+        }
+
+```
 
 
 
@@ -123,7 +281,16 @@ asp-route-id is parameter of Delete controller
 
 
 ### Controller logic for Edit
-![Step 1](NewEdit.png)
+
+```csharp
+    public IActionResult Edit(int GetId)
+    {
+        TodoNewModel model = new TodoNewModel();
+       
+        model.TodoModel = _TodoTable.TodoData.Find(GetId);
+        return View("TodoList", model);
+    }
+```
 
 
 
@@ -136,7 +303,24 @@ asp-route-id is parameter of Delete controller
 
 
 ### Controller logic for deleting data
-![Step 1](Delete.png)
+
+
+```csharp
+      [HttpPost]
+      public IActionResult Delete(int id)
+      {
+          var data = _TodoTable.TodoData.Find(id);
+          if(data == null)
+          {
+              return NotFound();
+          }
+        
+          _TodoTable.TodoData.Remove(data);
+          _TodoTable.SaveChanges();
+          return RedirectToAction("TodoList");
+      }
+
+```
 
 
 
